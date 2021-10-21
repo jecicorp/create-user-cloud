@@ -1,0 +1,8 @@
+<webscript>
+  <shortname>Create User</shortname>
+  <description>Create User Form</description>
+  <url>/fr/jeci/signin/create-user?guest=true</url>
+  <authentication runas="admin">guest</authentication>
+  <format default="json"></format>
+  <family>Cloud Jeci</family>
+</webscript>

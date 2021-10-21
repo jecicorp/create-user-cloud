@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model name="cloud:cloudJeciModel" xmlns="http://www.alfresco.org/model/dictionary/1.0">
+
+  <!-- Optional meta-data about the model -->
+  <description>Cloud Jeci Model</description>
+  <author>Cindy Piassale</author>
+  <version>1.0</version>
+
+  <imports>
+    <!-- Import Alfresco Dictionary Definitions -->
+    <import uri="http://www.alfresco.org/model/dictionary/1.0" prefix="d"/>
+  </imports>
+
+  <namespaces>
+    <namespace uri="http://jeci.fr/model/cloud/1.0" prefix="cloud"/>
+  </namespaces>
+
+  <aspects>
+    <aspect name="cloud:user">
+      <title>User cloud jeci</title>
+      <description>User created on cloud.pristy.net</description>
+      <properties>
+        <property name="cloud:signinCode">
+          <type>d:text</type>
+        </property>
+      </properties>
+    </aspect>
+  </aspects>
+
+</model>
