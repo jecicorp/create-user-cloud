@@ -58,7 +58,7 @@ public class CreateUserCloudWebScript extends DeclarativeWebScript {
 	private NodeService nodeService;
 
 	private List<String> domainBlack = new ArrayList<>(1);
-	private List<String> validCode = new ArrayList<>(1);
+	private List<String> validCodes = new ArrayList<>(1);
 
 	@Override
 	protected Map<String, Object> executeImpl(WebScriptRequest req, Status status, Cache cache) {
@@ -107,7 +107,7 @@ public class CreateUserCloudWebScript extends DeclarativeWebScript {
 		}
 
 		// validation du code
-		if (isValidCode(code)) {
+		if (!isValidCode(code)) {
 			logger.error("CreateUserCloud - Code non valide : " + code);
 			return model;
 		}
@@ -160,7 +160,7 @@ public class CreateUserCloudWebScript extends DeclarativeWebScript {
 
 		String tcode = code.trim().toUpperCase();
 
-		for (String vcode : this.validCode) {
+		for (String vcode : this.validCodes) {
 			if (vcode.equals(tcode)) {
 				return true;
 			}
@@ -252,7 +252,7 @@ public class CreateUserCloudWebScript extends DeclarativeWebScript {
 	}
 
 	public void setValidCodes(String validCodes) {
-		this.validCode = Arrays.asList(validCodes.split(","));
+		this.validCodes = Arrays.asList(validCodes.split(","));
 	}
 
 }
