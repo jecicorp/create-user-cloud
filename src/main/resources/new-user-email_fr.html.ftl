@@ -57,8 +57,10 @@
                                              </p>
 
                                              <p>Votre compte est limité à 500Mo d'espace disque pour vous laisser la possibilité de découvrir pristy<br />
+                                             Contactez le support si vous avez besoin de plus d'espace.<br />
+                                             <br />Attention votre compte sera supprimé automatiquement en cas d'inactivité<br />
                                              <br />Bonne navigation
-                                             </p>                                      
+                                             </p>
                                        
                                              <p>Cordialement,<br />
                                              Jeci</p>
@@ -75,7 +77,7 @@
                            </tr>
                            <tr>
                               <td style="padding: 0px 30px; font-size: 13px;">
-                                 Pour en savoir plus sur Pristy, visitez notre site Web <a href="https://pristy.fr">http://pristy.fr</a>
+                                 Pour en savoir plus sur Pristy, visitez notre site Web <a href="https://pristy.fr">https://pristy.fr</a>
                               </td>
                            </tr>
                            <tr>
@@ -85,7 +87,7 @@
                            </tr>
                            <tr>
                               <td style="padding: 10px 30px;">
-                                 <img src="${shareUrl}/themes/default/images/app-logo.png" alt="" width="117" height="48" border="0" />
+                                 <img src="https://pristy.fr/images/logo.png" alt="Logo Pristy" width="117" height="48" border="0" />
                               </td>
                            </tr>
                         </table>
