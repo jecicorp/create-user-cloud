@@ -17,6 +17,8 @@ package fr.jeci.alfresco.webscripts;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.alfresco.model.ContentModel;
 import org.alfresco.service.cmr.repository.NodeRef;
@@ -44,6 +46,8 @@ public class CreateUserCloudWebScript extends DeclarativeWebScript {
 	private static Log logger = LogFactory.getLog(CreateUserCloudWebScript.class);
 
 	private static final Long AUTHORIZED_QUOTA = Long.parseLong("524288000"); // 500Mo
+	private static final String EMAIL_PATTERN = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\\\.[A-Za-z0-9-]+)*(\\\\.[A-Za-z]{2,})$";
+	private static final Pattern pattern = Pattern.compile(EMAIL_PATTERN);
 
 	private MutableAuthenticationService authenticationService;
 	private PersonService personService;
@@ -109,8 +113,10 @@ public class CreateUserCloudWebScript extends DeclarativeWebScript {
 	 * @param mail
 	 * @return <true> or <false>
 	 */
-	private boolean isValidEmail(String mail) {
-		// TODO fonction de validation de l'email : format + SPAM
+	private boolean isValidEmail(String email) {
+		Matcher matcher = pattern.matcher(email);
+		return matcher.matches();
+	}
 		return true;
 	}
 
