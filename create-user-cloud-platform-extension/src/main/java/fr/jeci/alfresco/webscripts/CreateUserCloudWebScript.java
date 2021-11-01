@@ -136,15 +136,15 @@ public class CreateUserCloudWebScript extends DeclarativeWebScript {
 		String domain = data[1];
 
 		if (StringUtils.isBlank(domain)) {
-			return false;
+			return true;
 		}
 
 		for (String dom : domainBlack) {
 			if (dom.equalsIgnoreCase(domain)) {
-				return false;
+				return true;
 			}
 		}
-		return true;
+		return false;
 	}
 
 	/**
