@@ -57,7 +57,9 @@ public class CreateUserCloudWebScript extends DeclarativeWebScript {
 	private PersonService personService;
 	private NodeService nodeService;
 
+	private List<String> domainBlack = new ArrayList<>(1);
 	private List<String> validCode = new ArrayList<>(1);
+
 	@Override
 	protected Map<String, Object> executeImpl(WebScriptRequest req, Status status, Cache cache) {
 		Map<String, Object> model = new HashMap<>();
@@ -90,6 +92,12 @@ public class CreateUserCloudWebScript extends DeclarativeWebScript {
 			logger.error("CreateUserCloud - Email non valide");
 			return model;
 		}
+
+		if (isForbidDomain(email)) {
+			logger.error("CreateUserCloud - Domaine email non authorisé");
+			return model;
+		}
+
 		final String[] data = email.split("@");
 
 		if (this.personService.personExists(data[0])) {
@@ -122,6 +130,20 @@ public class CreateUserCloudWebScript extends DeclarativeWebScript {
 		Matcher matcher = pattern.matcher(email);
 		return matcher.matches();
 	}
+
+	private boolean isForbidDomain(String email) {
+		final String[] data = email.split("@");
+		String domain = data[1];
+
+		if (StringUtils.isBlank(domain)) {
+			return false;
+		}
+
+		for (String dom : domainBlack) {
+			if (dom.equalsIgnoreCase(domain)) {
+				return false;
+			}
+		}
 		return true;
 	}
 
@@ -153,8 +175,7 @@ public class CreateUserCloudWebScript extends DeclarativeWebScript {
 	 */
 	private String generatePassword() {
 		String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789~`!@#$%^&*()-_=+[{]}\\|;:\'\",<.>/?";
-		String pwd = RandomStringUtils.random(12, characters);
-		return pwd;
+		return RandomStringUtils.random(12, characters);
 	}
 
 	private NodeRef createUser(String username, String lastname, String password, String email, String code) {
@@ -224,6 +245,10 @@ public class CreateUserCloudWebScript extends DeclarativeWebScript {
 	 */
 	public void setNodeService(NodeService nodeService) {
 		this.nodeService = nodeService;
+	}
+
+	public void setDomainBlacklist(String domainBlacklist) {
+		this.domainBlack = Arrays.asList(domainBlacklist.split(","));
 	}
 
 	public void setValidCodes(String validCodes) {

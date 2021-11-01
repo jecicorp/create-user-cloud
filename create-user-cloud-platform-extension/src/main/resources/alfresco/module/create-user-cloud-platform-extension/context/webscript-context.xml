@@ -29,7 +29,9 @@
     <property name="nodeService">
       <ref bean="NodeService" />
     </property>
+    <property name="domainBlacklist" value="${create_user_cloud.domain_black_list}" />
     <property name="validCodes" value="${create_user_cloud.valid_codes}" />
+
   </bean>
 
 </beans>
