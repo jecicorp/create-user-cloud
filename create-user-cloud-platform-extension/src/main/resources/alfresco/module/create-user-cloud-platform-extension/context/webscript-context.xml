@@ -29,6 +29,7 @@
     <property name="nodeService">
       <ref bean="NodeService" />
     </property>
+    <property name="validCodes" value="${create_user_cloud.valid_codes}" />
   </bean>
 
 </beans>

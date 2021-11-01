@@ -15,7 +15,10 @@
 */
 package fr.jeci.alfresco.webscripts;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -27,6 +30,7 @@ import org.alfresco.service.cmr.security.MutableAuthenticationService;
 import org.alfresco.service.cmr.security.PersonService;
 import org.alfresco.util.PropertyMap;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.extensions.surf.util.ParameterCheck;
@@ -53,6 +57,7 @@ public class CreateUserCloudWebScript extends DeclarativeWebScript {
 	private PersonService personService;
 	private NodeService nodeService;
 
+	private List<String> validCode = new ArrayList<>(1);
 	@Override
 	protected Map<String, Object> executeImpl(WebScriptRequest req, Status status, Cache cache) {
 		Map<String, Object> model = new HashMap<>();
@@ -126,9 +131,19 @@ public class CreateUserCloudWebScript extends DeclarativeWebScript {
 	 * @param code
 	 * @return <true> or <false>
 	 */
-	private boolean isValidCode(String code) {
-		// TODO Ajouter d'autres code
-		return CloudJeciModel.CODE_OSXP.equalsIgnoreCase(code);
+	private boolean isValidCode(final String code) {
+		if (StringUtils.isBlank(code)) {
+			return false;
+		}
+
+		String tcode = code.trim().toUpperCase();
+
+		for (String vcode : this.validCode) {
+			if (vcode.equals(tcode)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/**
@@ -209,6 +224,10 @@ public class CreateUserCloudWebScript extends DeclarativeWebScript {
 	 */
 	public void setNodeService(NodeService nodeService) {
 		this.nodeService = nodeService;
+	}
+
+	public void setValidCodes(String validCodes) {
+		this.validCode = Arrays.asList(validCodes.split(","));
 	}
 
 }
