@@ -1,9 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<!-- 
+<!--
   Copyright 2021 - Jeci SARL - https://jeci.fr
 
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU Lesser General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
@@ -17,6 +15,10 @@
   You should have received a copy of the GNU Lesser General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/.
 -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
   <bean id="webscript.fr.jeci.alfresco.signin.create-user-cloud.post"
     class="fr.jeci.alfresco.webscripts.CreateUserCloudWebScript" parent="webscript">
