@@ -4,12 +4,12 @@
 * it under the terms of the GNU Lesser General Public License as published by
 * the Free Software Foundation, either version 3 of the License, or
 * (at your option) any later version.
-* 
+*
 * This program is distributed in the hope that it will be useful,
 * but WITHOUT ANY WARRANTY; without even the implied warranty of
 * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 * GNU Lesser General Public License for more details.
-* 
+*
 * You should have received a copy of the GNU Lesser General Public License
 * along with this program.  If not, see http://www.gnu.org/licenses/.
 */
@@ -50,7 +50,7 @@ public class CreateUserCloudWebScript extends DeclarativeWebScript {
 	private static Log logger = LogFactory.getLog(CreateUserCloudWebScript.class);
 
 	private static final Long AUTHORIZED_QUOTA = Long.parseLong("524288000"); // 500Mo
-	private static final String EMAIL_PATTERN = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\\\.[A-Za-z0-9-]+)*(\\\\.[A-Za-z]{2,})$";
+	private static final String EMAIL_PATTERN = "^[A-Za-z0-9+_.-]+@(.+)$";
 	private static final Pattern pattern = Pattern.compile(EMAIL_PATTERN);
 
 	private MutableAuthenticationService authenticationService;
@@ -89,12 +89,12 @@ public class CreateUserCloudWebScript extends DeclarativeWebScript {
 		}
 
 		if (!isValidEmail(email)) {
-			logger.error("CreateUserCloud - Email non valide");
+			logger.error("CreateUserCloud - Email non valide : " + email);
 			return model;
 		}
 
 		if (isForbidDomain(email)) {
-			logger.error("CreateUserCloud - Domaine email non authorisé");
+			logger.error("CreateUserCloud - Domaine email non authorisé : " + email);
 			return model;
 		}
 
@@ -122,7 +122,7 @@ public class CreateUserCloudWebScript extends DeclarativeWebScript {
 
 	/**
 	 * Validation de l'email
-	 * 
+	 *
 	 * @param mail
 	 * @return <true> or <false>
 	 */
@@ -149,7 +149,7 @@ public class CreateUserCloudWebScript extends DeclarativeWebScript {
 
 	/**
 	 * Validation du code
-	 * 
+	 *
 	 * @param code
 	 * @return <true> or <false>
 	 */
@@ -170,7 +170,7 @@ public class CreateUserCloudWebScript extends DeclarativeWebScript {
 
 	/**
 	 * Génération d'un mot de passe basé sur 12 charactères
-	 * 
+	 *
 	 * @return
 	 */
 	private String generatePassword() {
