@@ -43,14 +43,15 @@ import fr.jeci.alfresco.model.CloudJeciModel;
 public class CreateUserCloudWebScript extends DeclarativeWebScript {
 	private static Log logger = LogFactory.getLog(CreateUserCloudWebScript.class);
 
-	private static Long AUTHORIZED_QUOTA = Long.parseLong("524288000"); // 500Mo
+	private static final Long AUTHORIZED_QUOTA = Long.parseLong("524288000"); // 500Mo
 
 	private MutableAuthenticationService authenticationService;
 	private PersonService personService;
 	private NodeService nodeService;
 
+	@Override
 	protected Map<String, Object> executeImpl(WebScriptRequest req, Status status, Cache cache) {
-		Map<String, Object> model = new HashMap<String, Object>();
+		Map<String, Object> model = new HashMap<>();
 		NodeRef user = null;
 
 		// Récupération des données du formulaire
@@ -71,32 +72,34 @@ public class CreateUserCloudWebScript extends DeclarativeWebScript {
 			}
 		}
 
-		if (email != null && code != null) {
-			if (isValidEmail(email)) {
-				String[] data = email.split("@");
-
-				if (!this.personService.personExists(data[0])) {
-					// validation du code
-					if (isValidCode(code)) {
-						// Génération du mot de passe
-						String password = generatePassword();
-						// Création de l'utilisateur
-						user = createUser(data[0], data[1], password, email, code);
-						model.put("user", user);
-					} else {
-						logger.error("CreateUserCloud - Code non valide : " + code);
-					}
-				} else {
-					// L'utilisateur existe déjà
-					logger.error("CreateUserCloud - Un utilisateur existe déjà avec le meme login : " + data[0]);
-				}
-			} else {
-				logger.error("CreateUserCloud - Email non valide");
-			}
-		} else {
+		if (email == null || code == null) {
 			logger.error("CreateUserCloud - Un paramètre est manquant");
+			return model;
 		}
 
+		if (!isValidEmail(email)) {
+			logger.error("CreateUserCloud - Email non valide");
+			return model;
+		}
+		final String[] data = email.split("@");
+
+		if (this.personService.personExists(data[0])) {
+			// L'utilisateur existe déjà
+			logger.error("CreateUserCloud - Un utilisateur existe déjà avec le meme login : " + data[0]);
+			return model;
+		}
+
+		// validation du code
+		if (isValidCode(code)) {
+			logger.error("CreateUserCloud - Code non valide : " + code);
+			return model;
+		}
+
+		// Génération du mot de passe
+		final String password = generatePassword();
+		// Création de l'utilisateur
+		user = createUser(data[0], data[1], password, email, code);
+		model.put("user", user);
 		return model;
 	}
 
