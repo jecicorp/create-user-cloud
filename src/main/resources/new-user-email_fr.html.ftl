@@ -7,14 +7,14 @@
          font-size: 14px;
          color: #4c4c4c;
       }
-      
+
       a, a:visited
       {
          color: #0072cf;
       }
       --></style>
    </head>
-   
+
    <body bgcolor="#dddddd">
       <table width="100%" cellpadding="20" cellspacing="0" border="0" bgcolor="#dddddd">
          <tr>
@@ -46,11 +46,12 @@
                                           <div style="font-size: 14px; margin: 12px 0px 24px 0px; padding-top: 10px; border-top: 1px solid #aaaaaa;">
                                              <p>Bonjour ${firstname},</p>
 
-                                             <p>${creator.firstname} ${creator.lastname} a créé un compte Pristy pour vous.</p>
-                                             
+                                             <p>Votre compte sur <a
+href="https://cloud.pristy.net/pristy/">Pristy</a></p> vient d'être créé.</p>
+
                                              <p>Cliquez sur ce lien pour vous connecter :<br />
                                              <br /><a href="https://cloud.pristy.net/pristy/">cloud.pristy.net</a></p>
-                                             
+
                                              <p>Vos informations de connexion sont les suivantes :<br />
                                              <br />Nom d'utilisateur : <b>${username}</b>
                                              <br />Mot de passe : <b>${password}</b>
@@ -61,7 +62,7 @@
                                              <br />Attention votre compte sera supprimé automatiquement en cas d'inactivité<br />
                                              <br />Bonne navigation
                                              </p>
-                                       
+
                                              <p>Cordialement,<br />
                                              Jeci</p>
                                           </div>
