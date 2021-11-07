@@ -50,6 +50,7 @@ public class CreateUserCloudWebScript extends DeclarativeWebScript {
 	private static final int PASSWORD_LENGTH = 18;
 	private static final String PASSWORD_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
+	private static final String ERROR = "error";
 	private static final String SPLIT_EMAIL = "@";
 	private static final String CODE = "code";
 	private static final String EMAIL = "email";
@@ -93,18 +94,22 @@ public class CreateUserCloudWebScript extends DeclarativeWebScript {
 			}
 		}
 
-		if (email == null || code == null) {
-			logger.error("CreateUserCloud - Un paramètre est manquant");
+		if (StringUtils.isBlank(email)) {
+			model.put(ERROR, "Le paramètre 'email' est manquant");
+			return model;
+		}
+		if (StringUtils.isBlank(code)) {
+			model.put(ERROR, "Le paramètre 'code' est manquant");
 			return model;
 		}
 
 		if (!isValidEmail(email)) {
-			logger.error("CreateUserCloud - Email non valide : " + email);
+			model.put(ERROR, "Le paramètre 'email' n'est pas valide");
 			return model;
 		}
 
 		if (isForbidDomain(email)) {
-			logger.error("CreateUserCloud - Domaine email non authorisé : " + email);
+			model.put(ERROR, "Le domaine email n'est pas authorisé");
 			return model;
 		}
 
@@ -112,13 +117,13 @@ public class CreateUserCloudWebScript extends DeclarativeWebScript {
 
 		if (this.personService.personExists(data[0])) {
 			// L'utilisateur existe déjà
-			logger.error("CreateUserCloud - Un utilisateur existe déjà avec le meme login : " + data[0]);
+			model.put(ERROR, "Un utilisateur existe déjà avec le meme login");
 			return model;
 		}
 
 		// validation du code
 		if (!isValidCode(code)) {
-			logger.error("CreateUserCloud - Code non valide : " + code);
+			model.put(ERROR, "CreateUserCloud - Code non valide : " + code);
 			return model;
 		}
 

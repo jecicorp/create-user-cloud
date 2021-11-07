@@ -366,7 +366,17 @@
   <section class="banner">
 
     <div class="container card" style:"text-align: center !important;">
-    
+    <#if error??>
+      <div class="row">
+        <h1>Ereur lors de la création du compte</h1>
+      </div>
+      <div style=" margin:  1em;">
+          <div style=" margin:  1em;">
+            <span>Message : </span>
+            <span>${error}</span>
+          </div>
+      </div>
+    </#if>
  	<#if user??>
       <div class="row">
         <h1>Création de compte effectuée</h1>

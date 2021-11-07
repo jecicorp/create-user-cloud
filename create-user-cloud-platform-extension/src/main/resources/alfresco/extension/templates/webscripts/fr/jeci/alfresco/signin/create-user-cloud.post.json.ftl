@@ -1,5 +1,8 @@
 {
   "result": {
+  <#if error??>
+    "error": "${error}",
+  </#if>
   <#if user??>
     "nodeRef": "${user.nodeRef}",
     "username": "<#if user.properties.userName??>${user.properties.userName}</#if>",
