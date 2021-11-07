@@ -219,9 +219,6 @@ public class CreateUserCloudWebScript extends DeclarativeWebScript {
 			logger.debug("CreateUserCloudWebScript - code : " + code);
 		}
 		// Create the user profile
-		if (!this.personService.personExists(username)) {
-			person = personService.createPerson(properties);
-		}
 
 		if (person != null) {
 			// Add aspect cloud:user
@@ -236,6 +233,7 @@ public class CreateUserCloudWebScript extends DeclarativeWebScript {
 
 			// Notification with login and password
 			personService.notifyPerson(username, password);
+		person = personService.createPerson(properties);
 		}
 
 		return person;
