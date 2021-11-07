@@ -20,6 +20,8 @@
   <link rel="shortcut icon" href="https://pristy.fr/images/favicon.png" type="image/x-icon">
   <link rel="icon" href="https://pristy.fr/images/favicon.png" type="image/x-icon">
 
+
+
   <style>
     *,
     ::after,
@@ -372,11 +374,23 @@
       <div style=" margin:  1em;">
         <form action="${url.service}" method="post" enctype="multipart/form-data">
           <div style=" margin:  1em;">
-            <label for="email">Adresse mail : </label>
+            <label for="prenom">Prénom : </label>
+            <input type="text" id="prenom" name="prenom" />
+          </div>
+          <div style=" margin:  1em;">
+            <label for="nom">Nom : </label>
+            <input type="text" id="nom" name="nom" />
+          </div>
+          <div style=" margin:  1em;">
+            <label for="entreprise">Entrprise : </label>
+            <input type="text" id="entreprise" name="entreprise" />
+          </div>
+          <div style=" margin:  1em;">
+            <label for="email">*Adresse mail : </label>
             <input type="text" id="email" name="email" />
           </div>
           <div style=" margin:  1em;">
-            <label for="code" width="min">Code : </label>
+            <label for="code" width="min">*Code : </label>
             <input type="text" id="code" name="code" />
           </div>
           <div class="button" style=" margin:  1em;">

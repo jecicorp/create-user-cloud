@@ -57,6 +57,9 @@ public class CreateUserCloudWebScript extends DeclarativeWebScript {
 	private static final String PASSWORD = "password";
 	private static final String LASTNAME = "lastname";
 	private static final String FIRSTNAME = "firstname";
+	private static final String PRENOM = "prenom";
+	private static final String NOM = "nom";
+	private static final String ENTREPRISE = "entreprise";
 
 	private static Log logger = LogFactory.getLog(CreateUserCloudWebScript.class);
 
@@ -79,6 +82,9 @@ public class CreateUserCloudWebScript extends DeclarativeWebScript {
 		// Récupération des données du formulaire
 		String email = null;
 		String code = null;
+		String prenom = null;
+		String nom = null;
+		String entreprise = null;
 
 		final FormData form = (FormData) req.parseContent();
 		for (FormData.FormField field : form.getFields()) {
@@ -88,6 +94,15 @@ public class CreateUserCloudWebScript extends DeclarativeWebScript {
 				break;
 			case CODE:
 				code = field.getValue();
+				break;
+			case PRENOM:
+				prenom = field.getValue();
+				break;
+			case NOM:
+				nom = field.getValue();
+				break;
+			case ENTREPRISE:
+				entreprise = field.getValue();
 				break;
 			default:
 				break;
@@ -119,8 +134,9 @@ public class CreateUserCloudWebScript extends DeclarativeWebScript {
 		}
 
 		final String[] data = tlcEmail.split(SPLIT_EMAIL);
+		String username = data[0];
 
-		if (this.personService.personExists(data[0])) {
+		if (this.personService.personExists(username)) {
 			// L'utilisateur existe déjà
 			model.put(ERROR, "Un utilisateur existe déjà avec le meme login");
 			return model;
@@ -132,10 +148,17 @@ public class CreateUserCloudWebScript extends DeclarativeWebScript {
 			return model;
 		}
 
+		if (StringUtils.isBlank(prenom)) {
+			prenom = data[0];
+		}
+		if (StringUtils.isBlank(nom)) {
+			nom = data[1];
+		}
+
 		// Génération du mot de passe
 		final String password = generatePassword();
 		// Création de l'utilisateur
-		user = createUser(data[0], data[1], password, tlcEmail, tucCode);
+		user = createUser(username, password, tlcEmail, tucCode, prenom, nom, entreprise);
 
 		if (user == null) {
 			model.put(ERROR, "Erreur lors de la création de l'utilisateur");
@@ -201,26 +224,23 @@ public class CreateUserCloudWebScript extends DeclarativeWebScript {
 		return RandomStringUtils.random(PASSWORD_LENGTH, PASSWORD_CHARS);
 	}
 
-	private NodeRef createUser(String username, String lastname, String password, String email, String code) {
-		ParameterCheck.mandatory(FIRSTNAME, username);
-		ParameterCheck.mandatory(LASTNAME, lastname);
+	private NodeRef createUser(String username, String password, String email, String code, String prenom, String nom,
+			String entreprise) {
+		ParameterCheck.mandatory(FIRSTNAME, prenom);
+		ParameterCheck.mandatory(LASTNAME, nom);
 		ParameterCheck.mandatory(PASSWORD, password);
 		ParameterCheck.mandatory(EMAIL, email);
 		ParameterCheck.mandatory(CODE, code);
 
 		PropertyMap properties = new PropertyMap(5);
 		properties.put(ContentModel.PROP_USERNAME, username);
-		properties.put(ContentModel.PROP_FIRSTNAME, username);
-		properties.put(ContentModel.PROP_LASTNAME, lastname);
+		properties.put(ContentModel.PROP_FIRSTNAME, prenom);
+		properties.put(ContentModel.PROP_LASTNAME, nom);
 		properties.put(ContentModel.PROP_EMAIL, email);
 		properties.put(ContentModel.PROP_SIZE_QUOTA, AUTHORIZED_QUOTA);
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("CreateUserCloudWebScript - userName / firstName : " + username);
-			logger.debug("CreateUserCloudWebScript - lastName : " + lastname);
-			logger.debug("CreateUserCloudWebScript - email : " + email);
-			logger.debug("CreateUserCloudWebScript - password : " + password);
-			logger.debug("CreateUserCloudWebScript - code : " + code);
+		if (logger.isInfoEnabled()) {
+			logger.info(String.format("CreateUser %s;%s;%s;%s;%s;%s", prenom, nom, entreprise, password, email, code));
 		}
 
 		NodeRef person = personService.createPerson(properties);
