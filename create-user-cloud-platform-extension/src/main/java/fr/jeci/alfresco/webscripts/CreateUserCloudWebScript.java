@@ -47,12 +47,16 @@ import fr.jeci.alfresco.model.CloudJeciModel;
  *
  */
 public class CreateUserCloudWebScript extends DeclarativeWebScript {
+	private static final int PASSWORD_LENGTH = 18;
+	private static final String PASSWORD_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
 	private static final String SPLIT_EMAIL = "@";
 	private static final String CODE = "code";
 	private static final String EMAIL = "email";
 	private static final String PASSWORD = "password";
 	private static final String LASTNAME = "lastname";
 	private static final String FIRSTNAME = "firstname";
+
 	private static Log logger = LogFactory.getLog(CreateUserCloudWebScript.class);
 
 	private static final Long AUTHORIZED_QUOTA = Long.parseLong("524288000"); // 500Mo
@@ -180,8 +184,7 @@ public class CreateUserCloudWebScript extends DeclarativeWebScript {
 	 * @return
 	 */
 	private String generatePassword() {
-		String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789~`!@#$%^&*()-_=+[{]}\\|;:\'\",<.>/?";
-		return RandomStringUtils.random(12, characters);
+		return RandomStringUtils.random(PASSWORD_LENGTH, PASSWORD_CHARS);
 	}
 
 	private NodeRef createUser(String username, String lastname, String password, String email, String code) {
