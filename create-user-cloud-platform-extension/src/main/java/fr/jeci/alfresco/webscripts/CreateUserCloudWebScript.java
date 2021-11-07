@@ -204,7 +204,7 @@ public class CreateUserCloudWebScript extends DeclarativeWebScript {
 
 		NodeRef person = null;
 
-		PropertyMap properties = new PropertyMap();
+		PropertyMap properties = new PropertyMap(5);
 		properties.put(ContentModel.PROP_USERNAME, username);
 		properties.put(ContentModel.PROP_FIRSTNAME, username);
 		properties.put(ContentModel.PROP_LASTNAME, lastname);
@@ -225,19 +225,17 @@ public class CreateUserCloudWebScript extends DeclarativeWebScript {
 
 		if (person != null) {
 			// Add aspect cloud:user
-			PropertyMap propsCloud = new PropertyMap();
+			PropertyMap propsCloud = new PropertyMap(1);
 			propsCloud.put(CloudJeciModel.PROP_SIGNIN_CODE, code.toUpperCase());
 			this.nodeService.addAspect(person, CloudJeciModel.ASPECT_CLOUD_USER, propsCloud);
 
 			// Create the user account
-			if (password != null) {
-				// create account for person with the userName and password
-				authenticationService.createAuthentication(username, password.toCharArray());
-				authenticationService.setAuthenticationEnabled(username, true);
+			// create account for person with the userName and password
+			authenticationService.createAuthentication(username, password.toCharArray());
+			authenticationService.setAuthenticationEnabled(username, true);
 
-				// Notification with login and password
-				personService.notifyPerson(username, password);
-			}
+			// Notification with login and password
+			personService.notifyPerson(username, password);
 		}
 
 		return person;
