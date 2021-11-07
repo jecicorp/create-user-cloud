@@ -47,6 +47,12 @@ import fr.jeci.alfresco.model.CloudJeciModel;
  *
  */
 public class CreateUserCloudWebScript extends DeclarativeWebScript {
+	private static final String SPLIT_EMAIL = "@";
+	private static final String CODE = "code";
+	private static final String EMAIL = "email";
+	private static final String PASSWORD = "password";
+	private static final String LASTNAME = "lastname";
+	private static final String FIRSTNAME = "firstname";
 	private static Log logger = LogFactory.getLog(CreateUserCloudWebScript.class);
 
 	private static final Long AUTHORIZED_QUOTA = Long.parseLong("524288000"); // 500Mo
@@ -72,10 +78,10 @@ public class CreateUserCloudWebScript extends DeclarativeWebScript {
 		final FormData form = (FormData) req.parseContent();
 		for (FormData.FormField field : form.getFields()) {
 			switch (field.getName()) {
-			case "email":
+			case EMAIL:
 				email = field.getValue();
 				break;
-			case "code":
+			case CODE:
 				code = field.getValue();
 				break;
 			default:
@@ -98,7 +104,7 @@ public class CreateUserCloudWebScript extends DeclarativeWebScript {
 			return model;
 		}
 
-		final String[] data = email.split("@");
+		final String[] data = email.split(SPLIT_EMAIL);
 
 		if (this.personService.personExists(data[0])) {
 			// L'utilisateur existe déjà
@@ -132,7 +138,7 @@ public class CreateUserCloudWebScript extends DeclarativeWebScript {
 	}
 
 	private boolean isForbidDomain(String email) {
-		final String[] data = email.split("@");
+		final String[] data = email.split(SPLIT_EMAIL);
 		String domain = data[1];
 
 		if (StringUtils.isBlank(domain)) {
@@ -179,11 +185,11 @@ public class CreateUserCloudWebScript extends DeclarativeWebScript {
 	}
 
 	private NodeRef createUser(String username, String lastname, String password, String email, String code) {
-		ParameterCheck.mandatory("firstname", username);
-		ParameterCheck.mandatory("lastname", lastname);
-		ParameterCheck.mandatory("password", password);
-		ParameterCheck.mandatory("email", email);
-		ParameterCheck.mandatory("code", code);
+		ParameterCheck.mandatory(FIRSTNAME, username);
+		ParameterCheck.mandatory(LASTNAME, lastname);
+		ParameterCheck.mandatory(PASSWORD, password);
+		ParameterCheck.mandatory(EMAIL, email);
+		ParameterCheck.mandatory(CODE, code);
 
 		NodeRef person = null;
 
