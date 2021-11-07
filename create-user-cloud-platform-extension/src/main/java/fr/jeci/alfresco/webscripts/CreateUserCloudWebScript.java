@@ -136,6 +136,12 @@ public class CreateUserCloudWebScript extends DeclarativeWebScript {
 		final String password = generatePassword();
 		// Création de l'utilisateur
 		user = createUser(data[0], data[1], password, tlcEmail, tucCode);
+
+		if (user == null) {
+			model.put(ERROR, "Erreur lors de la création de l'utilisateur");
+			return model;
+		}
+
 		model.put("user", user);
 		return model;
 	}
@@ -202,8 +208,6 @@ public class CreateUserCloudWebScript extends DeclarativeWebScript {
 		ParameterCheck.mandatory(EMAIL, email);
 		ParameterCheck.mandatory(CODE, code);
 
-		NodeRef person = null;
-
 		PropertyMap properties = new PropertyMap(5);
 		properties.put(ContentModel.PROP_USERNAME, username);
 		properties.put(ContentModel.PROP_FIRSTNAME, username);
@@ -218,23 +222,25 @@ public class CreateUserCloudWebScript extends DeclarativeWebScript {
 			logger.debug("CreateUserCloudWebScript - password : " + password);
 			logger.debug("CreateUserCloudWebScript - code : " + code);
 		}
-		// Create the user profile
 
-		if (person != null) {
-			// Add aspect cloud:user
-			PropertyMap propsCloud = new PropertyMap(1);
-			propsCloud.put(CloudJeciModel.PROP_SIGNIN_CODE, code.toUpperCase());
-			this.nodeService.addAspect(person, CloudJeciModel.ASPECT_CLOUD_USER, propsCloud);
-
-			// Create the user account
-			// create account for person with the userName and password
-			authenticationService.createAuthentication(username, password.toCharArray());
-			authenticationService.setAuthenticationEnabled(username, true);
-
-			// Notification with login and password
-			personService.notifyPerson(username, password);
-		person = personService.createPerson(properties);
+		NodeRef person = personService.createPerson(properties);
+		if (person == null) {
+			logger.error("createPerson return null");
+			return null;
 		}
+
+		// Add aspect cloud:user
+		PropertyMap propsCloud = new PropertyMap(1);
+		propsCloud.put(CloudJeciModel.PROP_SIGNIN_CODE, code.toUpperCase());
+		this.nodeService.addAspect(person, CloudJeciModel.ASPECT_CLOUD_USER, propsCloud);
+
+		// Create the user account
+		// create account for person with the userName and password
+		authenticationService.createAuthentication(username, password.toCharArray());
+		authenticationService.setAuthenticationEnabled(username, true);
+
+		// Notification with login and password
+		personService.notifyPerson(username, password);
 
 		return person;
 	}
