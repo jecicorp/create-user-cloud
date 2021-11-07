@@ -3,6 +3,6 @@
   <description>Create User Form</description>
   <url>/fr/jeci/signin/create-user</url>
   <authentication runas="admin">none</authentication>
-  <format default="json"></format>
+  <format default="html"></format>
   <family>Cloud Jeci</family>
 </webscript>
