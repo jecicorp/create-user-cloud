@@ -98,22 +98,27 @@ public class CreateUserCloudWebScript extends DeclarativeWebScript {
 			model.put(ERROR, "Le paramètre 'email' est manquant");
 			return model;
 		}
+
+		String tlcEmail = email.trim().toLowerCase();
+
 		if (StringUtils.isBlank(code)) {
 			model.put(ERROR, "Le paramètre 'code' est manquant");
 			return model;
 		}
 
-		if (!isValidEmail(email)) {
+		String tucCode = code.trim().toUpperCase();
+
+		if (!isValidEmail(tlcEmail)) {
 			model.put(ERROR, "Le paramètre 'email' n'est pas valide");
 			return model;
 		}
 
-		if (isForbidDomain(email)) {
+		if (isForbidDomain(tlcEmail)) {
 			model.put(ERROR, "Le domaine email n'est pas authorisé");
 			return model;
 		}
 
-		final String[] data = email.split(SPLIT_EMAIL);
+		final String[] data = tlcEmail.split(SPLIT_EMAIL);
 
 		if (this.personService.personExists(data[0])) {
 			// L'utilisateur existe déjà
@@ -122,7 +127,7 @@ public class CreateUserCloudWebScript extends DeclarativeWebScript {
 		}
 
 		// validation du code
-		if (!isValidCode(code)) {
+		if (!isValidCode(tucCode)) {
 			model.put(ERROR, "CreateUserCloud - Code non valide : " + code);
 			return model;
 		}
@@ -130,7 +135,7 @@ public class CreateUserCloudWebScript extends DeclarativeWebScript {
 		// Génération du mot de passe
 		final String password = generatePassword();
 		// Création de l'utilisateur
-		user = createUser(data[0], data[1], password, email, code);
+		user = createUser(data[0], data[1], password, tlcEmail, tucCode);
 		model.put("user", user);
 		return model;
 	}
@@ -173,10 +178,8 @@ public class CreateUserCloudWebScript extends DeclarativeWebScript {
 			return false;
 		}
 
-		String tcode = code.trim().toUpperCase();
-
 		for (String vcode : this.validCodes) {
-			if (vcode.equals(tcode)) {
+			if (vcode.equals(code)) {
 				return true;
 			}
 		}
