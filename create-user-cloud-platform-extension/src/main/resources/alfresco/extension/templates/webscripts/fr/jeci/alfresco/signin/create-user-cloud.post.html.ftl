@@ -368,7 +368,7 @@
     <div class="container card" style:"text-align: center !important;">
     <#if error??>
       <div class="row">
-        <h1>Ereur lors de la création du compte</h1>
+        <h1>Erreur lors de la création du compte</h1>
       </div>
       <div style=" margin:  1em;">
           <div style=" margin:  1em;">

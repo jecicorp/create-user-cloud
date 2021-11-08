@@ -382,7 +382,7 @@
             <input type="text" id="nom" name="nom" />
           </div>
           <div style=" margin:  1em;">
-            <label for="entreprise">Entrprise : </label>
+            <label for="entreprise">Entreprise : </label>
             <input type="text" id="entreprise" name="entreprise" />
           </div>
           <div style=" margin:  1em;">
