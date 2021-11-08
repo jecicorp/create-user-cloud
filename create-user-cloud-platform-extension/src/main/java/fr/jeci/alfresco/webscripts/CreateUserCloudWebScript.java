@@ -238,6 +238,9 @@ public class CreateUserCloudWebScript extends DeclarativeWebScript {
 		properties.put(ContentModel.PROP_LASTNAME, nom);
 		properties.put(ContentModel.PROP_EMAIL, email);
 		properties.put(ContentModel.PROP_SIZE_QUOTA, AUTHORIZED_QUOTA);
+		if (org.codehaus.plexus.util.StringUtils.isNotBlank(entreprise)) {
+			properties.put(ContentModel.PROP_ORGANIZATION, entreprise);
+		}
 
 		if (logger.isInfoEnabled()) {
 			logger.info(String.format("CreateUser %s;%s;%s;%s;%s;%s", prenom, nom, entreprise, password, email, code));
