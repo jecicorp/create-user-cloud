@@ -6,10 +6,14 @@ services:
     build:
       dockerfile: ./Dockerfile
       context: ../../create-user-cloud-platform-docker/target
+    environment:
+      CATALINA_OPTS : "-agentlib:jdwp=transport=dt_socket,address=*:8000,server=y,suspend=n"
     volumes:
       - create-user-cloud-acs-volume:/usr/local/tomcat/alf_data
     depends_on:
       - ${db.host}
+    ports:
+      - 8000:8000
     networks:
       - backend
 
@@ -46,9 +50,14 @@ services:
       SOLR_SOLR_HOST: ${solr.host}
       SOLR_SOLR_PORT: 8983
       SOLR_CREATE_ALFRESCO_DEFAULTS: alfresco,archive
+      ALFRESCO_SECURE_COMMS: none
     volumes:
-      - create-user-cloud-contentstore-ass-volume:/opt/alfresco-search-services/contentstore
-      - create-user-cloud-data-ass-volume:/opt/alfresco-search-services/data
+      - create-user-cloud-solr-contentstore-volume:/opt/alfresco-search-services/contentstore
+      - create-user-cloud-solr-data-volume:/opt/alfresco-search-services/data
+      - create-user-cloud-solr-keystores-volume:/opt/alfresco-search-services/keystores
+      - create-user-cloud-solr-solrhome-volume:/opt/alfresco-search-services/solrhome
+    depends_on:
+      - ${acs.host}
     networks:
       - backend
 
@@ -64,14 +73,17 @@ services:
       - ${public.port}:8080
     depends_on:
       - ${acs.host}
+      - ${share.host}
     networks:
       - backend
 
 volumes:
   create-user-cloud-acs-volume:
   create-user-cloud-db-volume:
-  create-user-cloud-contentstore-ass-volume:
-  create-user-cloud-data-ass-volume:
+  create-user-cloud-solr-contentstore-volume:
+  create-user-cloud-solr-data-volume:
+  create-user-cloud-solr-keystores-volume:
+  create-user-cloud-solr-solrhome-volume:
 
 networks:
   backend:

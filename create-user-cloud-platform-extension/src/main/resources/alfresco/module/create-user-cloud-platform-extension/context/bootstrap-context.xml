@@ -28,7 +28,7 @@
 		</property>
 		<property name="labels">
 			<list>
-				<!--<value>alfresco/module/${project.artifactId}/messages/cloud-jeci-model</value> -->
+				<!-- <value>alfresco/module/${project.artifactId}/messages/cloud-jeci-model</value> -->
 			</list>
 		</property>
 	</bean>

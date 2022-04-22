@@ -5,7 +5,7 @@
 	<artifactId>create-user-cloud-share-docker</artifactId>
 	<name>Create User Cloud Share Docker</name>
 	<description>Create User Cloud Docker Image for Alfresco Share</description>
-	<packaging>pom</packaging>
+	<packaging>jar</packaging>
 
 	<parent>
 		<groupId>fr.jeci.alfresco</groupId>
@@ -32,6 +32,32 @@
 								<resource>
 									<directory>src/main/docker</directory>
 									<filtering>true</filtering>
+									<excludes>
+										<exclude>**/*.jar</exclude>
+										<exclude>**/*.so</exclude>
+										<exclude>**/*.gz</exclude>
+									</excludes>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+					<execution>
+						<id>copy-and-filter-docker-resources-non-filtered</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}</outputDirectory>
+							<resources>
+								<resource>
+									<directory>src/main/docker</directory>
+									<filtering>false</filtering>
+									<includes>
+										<include>**/*.jar</include>
+										<include>**/*.so</include>
+										<include>**/*.gz</include>
+									</includes>
 								</resource>
 							</resources>
 						</configuration>

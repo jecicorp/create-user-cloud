@@ -30,7 +30,7 @@
 			<!--
 				Developer debugging setting to turn on DEBUG mode for client scripts in the browser
 			-->
-			<client-debug>false</client-debug>
+			<client-debug>true</client-debug>
 			<!--
 				LOGGING can always be toggled at runtime when in DEBUG mode (Ctrl, Ctrl, Shift, Shift).
 				This flag automatically activates logging on page load.
@@ -45,6 +45,17 @@
 	-->
 	<config evaluator="string-compare" condition="CSRFPolicy" replace="true">
 		<filter />
+	</config>
+
+	<config evaluator="string-compare" condition="Users" replace="true">
+		<users>
+			<!-- minimum length for username and password -->
+			<username-min-length>2</username-min-length>
+			<password-min-length>3</password-min-length>
+			<show-authorization-status>false</show-authorization-status>
+		</users>
+		<!-- This enables/disables the Add External Users Panel on the Add Users page. -->
+		<enable-external-users-panel>false</enable-external-users-panel>
 	</config>
 
 	<!--
@@ -95,7 +106,8 @@
 				<parent-id>alfresco</parent-id>
 				<name>Alfresco Public API - user access</name>
 				<description>Access to Alfresco Repository Public API that require user authentication.
-					This makes use of the authentication that is provided by parent 'alfresco' endpoint.
+					This makes use of the authentication that is
+					provided by parent 'alfresco' endpoint.
 				</description>
 				<connector-id>alfresco</connector-id>
 				<endpoint-url>http://${acs.host}:8080/alfresco/api</endpoint-url>
