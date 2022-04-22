@@ -1,30 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Copyright 2021 - Jeci SARL - https://jeci.fr
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU Lesser General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+  GNU Lesser General Public License for more details.
+
+  You should have received a copy of the GNU Lesser General Public License
+  along with this program. If not, see http://www.gnu.org/licenses/.
+-->
 <model name="cloud:cloudJeciModel" xmlns="http://www.alfresco.org/model/dictionary/1.0">
 
-  <!-- Optional meta-data about the model -->
-  <description>Cloud Jeci Model</description>
-  <author>Cindy Piassale - JECI SARL</author>
-  <version>1.0</version>
+	<!-- Optional meta-data about the model -->
+	<description>Cloud Jeci Model</description>
+	<author>Cindy Piassale - JECI SARL</author>
+	<version>1.0</version>
 
-  <imports>
-    <!-- Import Alfresco Dictionary Definitions -->
-    <import uri="http://www.alfresco.org/model/dictionary/1.0" prefix="d"/>
-  </imports>
+	<imports>
+		<!-- Import Alfresco Dictionary Definitions -->
+		<import uri="http://www.alfresco.org/model/dictionary/1.0" prefix="d" />
+	</imports>
 
-  <namespaces>
-    <namespace uri="http://jeci.fr/model/cloud/1.0" prefix="cloud"/>
-  </namespaces>
+	<namespaces>
+		<namespace uri="http://jeci.fr/model/cloud/1.0" prefix="cloud" />
+	</namespaces>
 
-  <aspects>
-    <aspect name="cloud:user">
-      <title>User cloud jeci</title>
-      <description>User created on cloud.pristy.net</description>
-      <properties>
-        <property name="cloud:signinCode">
-          <type>d:text</type>
-        </property>
-      </properties>
-    </aspect>
-  </aspects>
+	<aspects>
+		<aspect name="cloud:user">
+			<title>User cloud jeci</title>
+			<description>User created on cloud.pristy.net</description>
+			<properties>
+				<property name="cloud:signinCode">
+					<type>d:text</type>
+				</property>
+			</properties>
+		</aspect>
+	</aspects>
 
 </model>
