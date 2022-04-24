@@ -32,4 +32,35 @@
 			</list>
 		</property>
 	</bean>
+
+	<bean id="fr.jeci.alfresco.bootstrap.patch.create-user-groups" class="org.alfresco.repo.admin.patch.impl.GenericBootstrapPatch"
+		parent="basePatch">
+		<property name="id">
+			<value>{bootstrap.create-user-groups.id}</value>
+		</property>
+		<property name="description">
+			<value>{bootstrap.create-user-groups.description}</value>
+		</property>
+		<property name="fixesFromSchema">
+			<value>0</value>
+		</property>
+		<property name="fixesToSchema">
+			<value>${version.schema}</value>
+		</property>
+		<property name="targetSchema">
+			<value>99999</value>
+		</property>
+		<property name="importerBootstrap">
+			<ref bean="spacesBootstrap" />
+		</property>
+		<property name="checkPath">
+			<value>/${system.authorities_container.childname}/cm:GROUP_CREATE_USER_ADMINISTRATORS</value>
+		</property>
+		<property name="bootstrapView">
+			<props>
+				<prop key="path">/${alfresco_user_store.system_container.childname}</prop>
+				<prop key="location">alfresco/module/${project.artifactId}/bootstrap/create-user-groups.xml</prop>
+			</props>
+		</property>
+	</bean>
 </beans>

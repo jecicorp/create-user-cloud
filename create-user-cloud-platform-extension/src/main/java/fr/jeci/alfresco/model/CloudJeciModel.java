@@ -24,4 +24,6 @@ public interface CloudJeciModel {
 
 	static final QName ASPECT_CLOUD_USER = QName.createQName(CLOUD_URI, "user");
 	static final QName PROP_SIGNIN_CODE = QName.createQName(CLOUD_URI, "signinCode");
+
+	String GROUP_CREATE_USER_ADMIN = "GROUP_CREATE_USER_ADMINISTRATORS";
 }
