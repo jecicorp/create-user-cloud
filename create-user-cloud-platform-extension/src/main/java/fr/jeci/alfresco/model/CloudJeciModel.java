@@ -30,4 +30,8 @@ public interface CloudJeciModel {
 	QName ASPECT_CLOUD_SITE = QName.createQName(CLOUD_URI, "site");
 	QName PROP_SIGNIN_CODE_SITE = QName.createQName(CLOUD_URI, "signinCodeSite");
 	String GROUP_CREATE_USER_ADMIN = "GROUP_CREATE_USER_ADMINISTRATORS";
+
+	// Email template
+	String XPATH_TEMPLATE_CREATE_USER_EXISTING_SITE = "app:company_home/app:dictionary/app:email_templates/cm:create-user-email-templates/cm:create-user-existing-site.html.ftl";
+	String XPATH_TEMPLATE_CREATE_USER_NEW_SITE = "app:company_home/app:dictionary/app:email_templates/cm:create-user-email-templates/cm:create-user-new-site.html.ftl";
 }

@@ -1,0 +1,65 @@
+<view:view xmlns:view="http://www.alfresco.org/view/repository/1.0" xmlns:cm="http://www.alfresco.org/model/content/1.0"
+	xmlns:app="http://www.alfresco.org/model/application/1.0" xmlns:sys="http://www.alfresco.org/model/system/1.0">
+
+	<cm:folder view:childName="cm:create-user-email-templates">
+		<app:uifacets />
+		<cm:name>Create User Email Templates</cm:name>
+		<app:icon>space-icon-default</app:icon>
+		<cm:title>Create User Email Templates</cm:title>
+		<cm:description></cm:description>
+		<cm:contains>
+			<cm:content view:childName="cm:create-user-existing-site.html.ftl">
+				<view:aspects>
+					<cm:titled />
+					<app:inlineeditable />
+				</view:aspects>
+				<view:properties>
+					<app:editInline>true</app:editInline>
+					<cm:content>contentUrl=classpath:alfresco/module/${project.artifactId}/bootstrap/email-templates/create-user-existing-site_fr.html.ftl|mimetype=text/plain|size=|encoding=UTF-8|locale=fr_FR_</cm:content>
+					<cm:title>Notifie la création d'un nouveau compte et l'ajout dans un site existant</cm:title>
+					<cm:name>create-user-existing-site.html.ftl</cm:name>
+					<sys:locale>fr_FR</sys:locale>
+				</view:properties>
+			</cm:content>
+			<cm:content view:childName="cm:create-user-existing-site_fr.html.ftl">
+				<view:aspects>
+					<cm:titled />
+					<app:inlineeditable />
+				</view:aspects>
+				<view:properties>
+					<app:editInline>true</app:editInline>
+					<cm:content>contentUrl=classpath:alfresco/module/${project.artifactId}/bootstrap/email-templates/create-user-existing-site_fr.html.ftl|mimetype=text/plain|size=|encoding=UTF-8|locale=fr_FR_</cm:content>
+					<cm:title>Notifie la création d'un nouveau compte et l'ajout dans un site existant</cm:title>
+					<cm:name>create-user-existing-site_fr.html.ftl</cm:name>
+					<sys:locale>fr_FR</sys:locale>
+				</view:properties>
+			</cm:content>
+			<cm:content view:childName="cm:create-user-new-site.html.ftl">
+				<view:aspects>
+					<cm:titled />
+					<app:inlineeditable />
+				</view:aspects>
+				<view:properties>
+					<app:editInline>true</app:editInline>
+					<cm:content>contentUrl=classpath:alfresco/module/${project.artifactId}/bootstrap/email-templates/create-user-new-site_fr.html.ftl|mimetype=text/plain|size=|encoding=UTF-8|locale=fr_FR_</cm:content>
+					<cm:title>Notifie la création d'un nouveau compte et fournit le code pour d'autres ajouts</cm:title>
+					<cm:name>create-user-new-site.html.ftl</cm:name>
+					<sys:locale>fr_FR</sys:locale>
+				</view:properties>
+			</cm:content>
+			<cm:content view:childName="cm:create-user-new-site_fr.html.ftl">
+				<view:aspects>
+					<cm:titled />
+					<app:inlineeditable />
+				</view:aspects>
+				<view:properties>
+					<app:editInline>true</app:editInline>
+					<cm:content>contentUrl=classpath:alfresco/module/${project.artifactId}/bootstrap/email-templates/create-user-new-site_fr.html.ftl|mimetype=text/plain|size=|encoding=UTF-8|locale=fr_FR_</cm:content>
+					<cm:title>Notifie la création d'un nouveau compte et fournit le code pour d'autres ajouts</cm:title>
+					<cm:name>create-user-new-site_fr.html.ftl</cm:name>
+					<sys:locale>fr_FR</sys:locale>
+				</view:properties>
+			</cm:content>
+		</cm:contains>
+	</cm:folder>
+</view:view>

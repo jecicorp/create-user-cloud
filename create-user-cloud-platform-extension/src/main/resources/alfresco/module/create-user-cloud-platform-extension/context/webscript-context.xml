@@ -24,11 +24,26 @@
 		<property name="authenticationService">
 			<ref bean="AuthenticationService" />
 		</property>
+		<property name="authorityService">
+			<ref bean="AuthorityService" />
+		</property>
 		<property name="personService">
 			<ref bean="PersonService" />
 		</property>
 		<property name="nodeService">
 			<ref bean="NodeService" />
+		</property>
+		<property name="searchService">
+			<ref bean="SearchService" />
+		</property>
+		<property name="siteService">
+			<ref bean="SiteService" />
+		</property>
+		<property name="fileFolderService">
+			<ref bean="FileFolderService" />
+		</property>
+		<property name="namespaceService">
+			<ref bean="NamespaceService" />
 		</property>
 		<property name="domainBlacklist" value="${create_user_cloud.domain_black_list}" />
 		<property name="validCodes" value="${create_user_cloud.valid_codes}" />
