@@ -19,11 +19,15 @@ import org.alfresco.service.namespace.QName;
 
 public interface CloudJeciModel {
 
-	static final String CLOUD_PREFIX = "cloud";
-	static final String CLOUD_URI = "http://jeci.fr/model/cloud/1.0";
+	String CLOUD_PREFIX = "cloud";
+	String CLOUD_URI = "http://jeci.fr/model/cloud/1.0";
 
-	static final QName ASPECT_CLOUD_USER = QName.createQName(CLOUD_URI, "user");
-	static final QName PROP_SIGNIN_CODE = QName.createQName(CLOUD_URI, "signinCode");
+	// Aspect for user
+	QName ASPECT_CLOUD_USER = QName.createQName(CLOUD_URI, "user");
+	QName PROP_SIGNIN_CODE = QName.createQName(CLOUD_URI, "signinCode");
 
+	// Aspect for site
+	QName ASPECT_CLOUD_SITE = QName.createQName(CLOUD_URI, "site");
+	QName PROP_SIGNIN_CODE_SITE = QName.createQName(CLOUD_URI, "signinCodeSite");
 	String GROUP_CREATE_USER_ADMIN = "GROUP_CREATE_USER_ADMINISTRATORS";
 }
