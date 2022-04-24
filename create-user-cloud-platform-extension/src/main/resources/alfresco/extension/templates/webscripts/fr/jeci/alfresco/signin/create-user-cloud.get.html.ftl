@@ -34,7 +34,7 @@
           <#if isMember>
           <div style=" margin:  1em;">
             <label for="entreprise">Entreprise : </label>
-            <input type="text" id="entreprise" name="entreprise" />
+            <input type="text" id="entreprise" name="entreprise" value="<#if organization??>${organization}</#if>" />
           </div>
           </#if>
           <div style=" margin:  1em;">

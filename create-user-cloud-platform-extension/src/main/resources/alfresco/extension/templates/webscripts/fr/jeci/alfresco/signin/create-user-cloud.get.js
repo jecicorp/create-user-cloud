@@ -1,6 +1,7 @@
 function main() {
   var groups = people.getContainerGroups(person);
   
+  model.organization = person.properties["cm:organization"];
   model.isMember = isMember("GROUP_CREATE_USER_ADMINISTRATORS", groups);
 }
 
