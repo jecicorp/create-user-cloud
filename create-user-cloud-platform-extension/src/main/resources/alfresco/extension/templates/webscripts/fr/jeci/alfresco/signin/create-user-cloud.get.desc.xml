@@ -2,7 +2,7 @@
 	<shortname>Create User</shortname>
 	<description>Create User Form</description>
 	<url>/fr/jeci/signin/create-user</url>
-	<authentication>none</authentication>
+	<authentication>user</authentication>
 	<format default="html"></format>
 	<family>Cloud Jeci</family>
 </webscript>
