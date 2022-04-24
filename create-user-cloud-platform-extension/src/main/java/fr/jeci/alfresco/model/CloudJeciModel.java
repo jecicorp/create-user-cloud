@@ -29,7 +29,13 @@ public interface CloudJeciModel {
 	// Aspect for site
 	QName ASPECT_CLOUD_SITE = QName.createQName(CLOUD_URI, "site");
 	QName PROP_SIGNIN_CODE_SITE = QName.createQName(CLOUD_URI, "signinCodeSite");
+
 	String GROUP_CREATE_USER_ADMIN = "GROUP_CREATE_USER_ADMINISTRATORS";
+	String USER_ADMIN = "admin";
+	String SITE_PRESET_DASHBOARD = "site-dashboard";
+	String PATTERN_SITE_DEMO_SHORTNAME = "demo-pristy_{0}";
+	String PATTERN_SITE_DEMO_TITLE = "Démo Pristy - {0}";
+	String SITE_DEMO_DESCRIPTION = "Site de démonstration pour tester Pristy";
 
 	// Email template
 	String XPATH_TEMPLATE_CREATE_USER_EXISTING_SITE = "app:company_home/app:dictionary/app:email_templates/cm:create-user-email-templates/cm:create-user-existing-site.html.ftl";
