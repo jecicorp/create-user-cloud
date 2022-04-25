@@ -54,6 +54,9 @@
 		<docker.nginx.image>docker.io/library/nginx</docker.nginx.image>
 		<docker.nginx.version>stable-alpine</docker.nginx.version>
 
+		<!-- Smtp Config -->
+		<smtp.host>send-mail-fakesmtp</smtp.host>
+
 		<!-- This parameter is only required for those cases in which ACS is not exposed in http://localhost:8080/alfresco (i.e. Windows Docker) -->
 		<test.acs.endpoint.path></test.acs.endpoint.path>
 	</properties>

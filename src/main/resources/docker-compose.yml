@@ -77,6 +77,15 @@ services:
     networks:
       - backend
 
+  ${smtp.host}:
+    image: munkyboy/fakesmtp
+    ports:
+      - "2525:25"
+    volumes:
+      - create-user-cloud-smtp-volume:/var/mail
+    networks:
+      - backend
+
 volumes:
   create-user-cloud-acs-volume:
   create-user-cloud-db-volume:
@@ -84,6 +93,7 @@ volumes:
   create-user-cloud-solr-data-volume:
   create-user-cloud-solr-keystores-volume:
   create-user-cloud-solr-solrhome-volume:
+  create-user-cloud-smtp-volume:
 
 networks:
   backend:
