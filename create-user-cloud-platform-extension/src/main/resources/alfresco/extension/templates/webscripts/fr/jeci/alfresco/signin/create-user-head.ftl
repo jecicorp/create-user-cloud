@@ -229,11 +229,11 @@
     }
 
     .navigation {
-      background-color: #fda18b
+      background-color: #30afcc
     }
 
     .banner {
-      background-image: url('https://pristy.fr/images/bubble-banner.png');
+      background-image: url('https://pristy.fr/images/bubble-banner_blue.png');
       background-repeat: no-repeat;
       padding: 30px 0;
       height: 100%;

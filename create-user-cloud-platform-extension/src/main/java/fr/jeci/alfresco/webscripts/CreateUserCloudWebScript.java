@@ -182,6 +182,7 @@ public class CreateUserCloudWebScript extends DeclarativeWebScript {
 
 		model.put("user", user);
 		model.put("site", siteRef);
+		model.put("serverPath", req.getServerPath());
 
 		return model;
 	}
