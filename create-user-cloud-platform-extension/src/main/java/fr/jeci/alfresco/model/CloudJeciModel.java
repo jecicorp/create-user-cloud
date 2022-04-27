@@ -31,6 +31,7 @@ public interface CloudJeciModel {
 	QName PROP_SIGNIN_CODE_SITE = QName.createQName(CLOUD_URI, "signinCodeSite");
 
 	String GROUP_CREATE_USER_ADMIN = "GROUP_CREATE_USER_ADMINISTRATORS";
+	String GROUP_SITE_CREATORS = "GROUP_SITE_CREATORS";
 	String USER_ADMIN = "admin";
 	String SITE_PRESET_DASHBOARD = "site-dashboard";
 	String PATTERN_SITE_DEMO_SHORTNAME = "demo-pristy_{0}";

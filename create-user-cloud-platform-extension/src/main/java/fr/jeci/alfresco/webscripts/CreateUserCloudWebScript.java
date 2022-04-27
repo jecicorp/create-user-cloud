@@ -161,6 +161,8 @@ public class CreateUserCloudWebScript extends DeclarativeWebScript {
 			// Template mail - Add user in site
 			templateMail = getNotifyEmailTemplateNodeRef(CloudJeciModel.XPATH_TEMPLATE_CREATE_USER_EXISTING_SITE);
 		} else if (isCreateUserAdmin && StringUtils.isNotBlank(enterprise)) {
+			// Add user in SITE_CREATORS
+			addToSiteCreators(userName);
 			// Create a site for the enterprise
 			String shortName = withoutSpaceAndAccent(enterprise);
 			SiteInfo newSite = siteService
@@ -178,7 +180,8 @@ public class CreateUserCloudWebScript extends DeclarativeWebScript {
 		siteService.setMembership((String) nodeService.getProperty(siteRef, ContentModel.PROP_NAME), userName,
 				SiteModel.SITE_MANAGER);
 		// Notification with login and password
-		notifyPerson(personService.getPerson(currentUserName), user, password, siteRef, templateMail, req.getServerPath());
+		notifyPerson(personService.getPerson(currentUserName), user, password, siteRef, templateMail,
+				req.getServerPath());
 
 		model.put("user", user);
 		model.put("site", siteRef);
@@ -209,6 +212,25 @@ public class CreateUserCloudWebScript extends DeclarativeWebScript {
 		}
 
 		return false;
+	}
+
+	/**
+	 * Add the user in site creators group
+	 * 
+	 * @param userName
+	 */
+	private void addToSiteCreators(String userName) {
+		AuthenticationUtil.pushAuthentication();
+		try {
+			AuthenticationUtil.setRunAsUser(CloudJeciModel.USER_ADMIN);
+
+			// Add user in group SITE_CREATORS (if exists)
+			if (authorityService.authorityExists(CloudJeciModel.GROUP_SITE_CREATORS)) {
+				authorityService.addAuthority(CloudJeciModel.GROUP_SITE_CREATORS, userName);
+			}
+		} finally {
+			AuthenticationUtil.popAuthentication();
+		}
 	}
 
 	/**
