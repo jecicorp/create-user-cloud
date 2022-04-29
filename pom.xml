@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>fr.jeci.alfresco</groupId>
 	<artifactId>create-user-cloud</artifactId>
-	<version>1.1.0-SNAPSHOT</version>
+	<version>1.1.0</version>
 	<name>Create User Cloud</name>
 	<description>Create User for cloud.pristy.net</description>
 	<packaging>pom</packaging>
